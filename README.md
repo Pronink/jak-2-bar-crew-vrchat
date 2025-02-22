@@ -186,24 +186,24 @@ dar algunos tips en las partes del desarrollo donde me quedé más atascado.
 
 ## Snapshots Blender
 
-![img.png](blender%2Fimg.png)
+![images/blender/img.png](images/blender/img.png)
 
-![img_1.png](blender%2Fimg_1.png)
+![images/blender/img_1.png](images/blender/img_1.png)
 
-![img_2.png](blender%2Fimg_2.png)
+![images/blender/img_2.png](images/blender/img_2.png)
 
-![img_3.png](blender%2Fimg_3.png)
+![images/blender/img_3.png](images/blender/img_3.png)
 
 ## Snapshots Unity
 
-![img.png](unity%2Fimg.png)
+![images/unity/img.png](images/unity/img.png)
 
-![img_5.png](unity%2Fimg_5.png)
+![images/unity/img_5.png](images/unity/img_5.png)
 
-![img_1.png](unity%2Fimg_1.png)
+![images/unity/img_1.png](images/unity/img_1.png)
 
-![img_2.png](unity%2Fimg_2.png)
+![images/unity/img_2.png](images/unity/img_2.png)
 
-![img_3.png](unity%2Fimg_3.png)
+![images/unity/img_3.png](images/unity/img_3.png)
 
-![img_4.png](unity%2Fimg_4.png)
+![images/unity/img_4.png](images/unity/img_4.png)
