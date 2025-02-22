@@ -1,6 +1,7 @@
-# WIP
+# WIP (work in progress)
+// Traducir al inglés
 
-![img.png](images/img.png)
+![miniatura-yt.png](images%2Fyoutube%2Fminiatura-yt.png)
 
 En este manual voy a explicar como desarrollé el port del bar de Jak 2 desde los
 archivos del juego hasta un mapa de VRChat, pasando por Blender y Unity.
@@ -9,7 +10,7 @@ los modelos 3D y texturas que uso están protegidos por derechos de autor.
 
 # Video del resultado:
 [![](images/youtube/miniatura-yt-click.png)](https://www.youtube.com/watch?v=aNAteD-LEzs)
-// Sacar fotos del interior del bar de jak, y poner junto con el video
+// Poner más fotos del bar de jak, y poner junto con el video
 
 # Características principales
 
@@ -64,7 +65,7 @@ me costaron en el momento de hacerlo.
 ```mermaid
 flowchart LR
     DVD[Jak 2 DVD] --> decompiler{OpenGoal decompiler}
-    decompiler --> Src[Sourcecode] --> compiler
+    decompiler --> Src[Source code] --> compiler
     decompiler --> Music --> compiler
     decompiler --> Assets[More assets] --> compiler
     decompiler --> Levels --> compiler
