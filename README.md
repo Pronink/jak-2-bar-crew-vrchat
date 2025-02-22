@@ -7,7 +7,7 @@ archivos del juego hasta un mapa de VRChat, pasando por Blender y Unity.
 Lamentablemente, este repositorio no contiene ningún archivo dado que varios de
 los modelos 3D y texturas que uso están protegidos por derechos de autor.
 
-Video del resultado:
+# Video del resultado:
 [![](images/youtube/miniatura-yt-click.png)](https://www.youtube.com/watch?v=aNAteD-LEzs)
 // Sacar fotos del interior del bar de jak, y poner junto con el video
 
@@ -63,16 +63,13 @@ me costaron en el momento de hacerlo.
 
 ```mermaid
 flowchart LR
-    DVD[Jak 2 \n DVD] --> decompiler{OpenGoal \n decompiler}
-    decompiler --> Src[Source \n code] --> compiler
+    DVD[Jak 2 DVD] --> decompiler{OpenGoal decompiler}
+    decompiler --> Src[Sourcecode] --> compiler
     decompiler --> Music --> compiler
-    decompiler --> Assets[More \n assets] --> compiler
+    decompiler --> Assets[More assets] --> compiler
     decompiler --> Levels --> compiler
-    compiler{OpenGoal \n compiler} --> PC[PC \n executable]
-    Levels["Models \n (glb_out)"] --> copyThese([Copy these \n .glb files])
-%%    Levels --> blender
-%%    Textures --> blender
-%%    blender[Blender] --> unity[Unity]
+    compiler{OpenGoal compiler} --> PC[PC executable]
+    Levels["Models (glb_out)"] --> copyThese([Copy these .glb files])
 ```
 
 - Vamos a seguir los pasos que nos describe
@@ -108,7 +105,7 @@ hay ciertas cosas que hay que arreglar.
       en el `Shader Editor` (Shift + F3) quitando unos nodos intermedios que le
       ponen efectos no deseados:
       ![shaders-jak.gif](images/shaders-jak.gif)
-    - en la parte de Materiales del modelo, hacer scroll hacia abajo buscando
+    - En la parte de Materiales del modelo, hacer scroll hacia abajo buscando
       una caja desplegada llamada Settings y cambiar el `Blend Mode` de
       `Alpha Blend` a `Opaque`. Aunque para este caso, conseguí crear un script
       para iterar todos los materiales y editarlos de una sola vez. Para ello
@@ -184,7 +181,7 @@ dar algunos tips en las partes del desarrollo donde me quedé más atascado.
 - A partir de aquí ya es ir montando el escenario usando todos los modelos y
   texturas, agregando iluminación, assets y lógica de programación con `Udon`
 
-## Snapshots Blender
+## Imágenes Blender
 
 ![images/blender/img.png](images/blender/img.png)
 
@@ -194,7 +191,7 @@ dar algunos tips en las partes del desarrollo donde me quedé más atascado.
 
 ![images/blender/img_3.png](images/blender/img_3.png)
 
-## Snapshots Unity
+## Imágenes Unity
 
 ![images/unity/img.png](images/unity/img.png)
 
