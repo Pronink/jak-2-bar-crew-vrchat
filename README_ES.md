@@ -1,5 +1,14 @@
+# Idioma
+
+| [English](README.md) | **Español** |
+|----------------------|-------------|
+
+# Índice
+
 <!-- TOC -->
-* [Video del resultado:](#video-del-resultado)
+* [Idioma](#idioma)
+* [Índice](#índice)
+* [Video del resultado](#video-del-resultado)
 * [Características principales](#características-principales)
 * [Pasos](#pasos)
   * [Extraer modelos y texturas con OpenGoal](#extraer-modelos-y-texturas-con-opengoal)
@@ -10,14 +19,15 @@
 <!-- TOC -->
 
 
-![miniatura-yt.png](images%2Fyoutube%2Fminiatura-yt.png)
+![miniatura-yt.png](images/youtube/miniatura-yt.png)
 
 En este manual voy a explicar como desarrollé el port del bar de Jak 2 desde los
 archivos del juego hasta un mapa de VRChat, pasando por Blender y Unity.
 Lamentablemente, este repositorio no contiene ningún archivo dado que varios de
 los modelos 3D y texturas que uso están protegidos por derechos de autor.
 
-# Video del resultado:
+# Video del resultado
+
 [![](images/youtube/miniatura-yt-click.png)](https://www.youtube.com/watch?v=aNAteD-LEzs)
 
 # Características principales
@@ -32,7 +42,7 @@ los modelos 3D y texturas que uso están protegidos por derechos de autor.
 - Espejo de bar activable local
 - Activación/desactivación del exterior e interior del bar
     - Cuando el jugador está en la ciudad, el interior del bar se desactiva
-      completamente
+      completamente (no es renderizado)
     - Cuando el jugador entra en el bar, se desactiva la ciudad y se activa el
       interior
 - El spawn de los jugadores está en un transporte de la guardia Carmesí que
@@ -72,19 +82,19 @@ me costaron en el momento de hacerlo.
 
 ```mermaid
 flowchart LR
-    DVD[Jak 2 DVD] --> decompiler{OpenGoal decompiler}
-    decompiler --> Src[Source code] --> compiler
-    decompiler --> Music --> compiler
-    decompiler --> Assets[More assets] --> compiler
-    decompiler --> Levels --> compiler
-    compiler{OpenGoal compiler} --> PC[PC executable]
-    Levels["Models (glb_out)"] --> copyThese([Copy these .glb files])
+    DVD[DVD Jak 2] --> decompiler{Descompilador OpenGoal}
+    decompiler --> Src[Código fuente] --> compiler
+    decompiler --> Music[Música] --> compiler
+    decompiler --> Assets[Más assets] --> compiler
+    decompiler --> Levels[Niveles] --> compiler
+    compiler{Compilador OpenGoal} --> PC[Ejecutable PC]
+    Levels["Modelos (glb_out)"] --> copyThese([Copia estos archivos .glb])
 ```
 
 - Vamos a seguir los pasos que nos describe
   la [guía de OpenGoal](https://opengoal.dev/docs/usage/installation/) para
   jugar a Jak 2 en nuestro PC. OpenGoal solo ofrece las herramientas para
-  convertir el juego de PlayStation 2, pero no el juego en si mismo, por lo
+  convertir el juego de PlayStation 2 a PC, pero no el juego en sí mismo, por lo
   que necesitaréis el juego original o un archivo ISO.
 - OpenGoal no necesita exportar los niveles (mapas) del juego para generar el
   ejecutable final, y nosotros sí necesitamos esos archivos. Por ello, vamos a

@@ -1,74 +1,81 @@
+# Language
+
+| **English** | [Español](README_ES.md) |
+|-------------|-------------------------|
+
+# Table of contents
+
 <!-- TOC -->
-* [Video del resultado:](#video-del-resultado)
-* [Características principales](#características-principales)
-* [Pasos](#pasos)
-  * [Extraer modelos y texturas con OpenGoal](#extraer-modelos-y-texturas-con-opengoal)
-  * [Preparado de los modelos con Blender](#preparado-de-los-modelos-con-blender)
-  * [Creando el escenario para VRChat](#creando-el-escenario-para-vrchat)
-* [Imágenes Blender](#imágenes-blender)
-* [Imágenes Unity](#imágenes-unity)
+* [Language](#language)
+* [Table of contents](#table-of-contents)
+* [Video of the Result](#video-of-the-result)
+* [Main Features](#main-features)
+* [Steps](#steps)
+  * [Extracting Models and Textures with OpenGoal](#extracting-models-and-textures-with-opengoal)
+  * [Preparing the Models with Blender](#preparing-the-models-with-blender)
+  * [Creating the Environment for VRChat](#creating-the-environment-for-vrchat)
+* [Blender Images](#blender-images)
+* [Unity Images](#unity-images)
 <!-- TOC -->
 
 
-![miniatura-yt.png](images%2Fyoutube%2Fminiatura-yt.png)
 
-En este manual voy a explicar como desarrollé el port del bar de Jak 2 desde los
-archivos del juego hasta un mapa de VRChat, pasando por Blender y Unity.
-Lamentablemente, este repositorio no contiene ningún archivo dado que varios de
-los modelos 3D y texturas que uso están protegidos por derechos de autor.
+![miniatura-yt.png](images/youtube/miniatura-yt.png)
 
-# Video del resultado:
+In this manual, I will explain how I developed the port of the Jak 2 bar from
+the game's files to a VRChat map, going through Blender and Unity.
+Unfortunately, this repository does not contain any files as several of the 3D
+models and textures I used are copyrighted.
+
+# Video of the Result
+
 [![](images/youtube/miniatura-yt-click.png)](https://www.youtube.com/watch?v=aNAteD-LEzs)
 
-# Características principales
+# Main Features
 
-- Todos los puntos de luz han sido colocados de forma manual y la luz
-  que genera es toda baked (excepto la de la barra de pole dance)
-- Reproductor de vídeo
-- Barra de pole dance funcional
-- Rotuladores para dibujar en 3D
-- Las copas, vasos y sillas del bar son interactuables
-- Barra de bar desactivable global
-- Espejo de bar activable local
-- Activación/desactivación del exterior e interior del bar
-    - Cuando el jugador está en la ciudad, el interior del bar se desactiva
-      completamente
-    - Cuando el jugador entra en el bar, se desactiva la ciudad y se activa el
-      interior
-- El spawn de los jugadores está en un transporte de la guardia Carmesí que
-  se mueve con una animación
-- Neon del bar en 3D basado en el sprite original
-- Partículas de polvo en suspensión en las zonas bien iluminadas
-- Recolocadas el templo Precursor y el castillo de la ciudad para que sea
-  visible desde el exterior del bar, aunque en el videojuego no están ahi
-- La ciudad está a varios niveles de detalle, haciendo que la zona de juego
-  mantenga la resolución de los modelos del juego original y todo lo demás
-  con una resolución mucho más baja
-- Agua que simula el reflejo de la ciudad. En realidad, toda la ciudad está
-  duplicada en menor detalle abajo y al ser el agua semitransparente,
-  aparenta que es un reflejo. El uso de técnicas como Reflection Probes o
-  Screen Space Reflections no funcionaban bien
-- Optimizadas las colisiones, que usan una versión de menor complejidad que
-  el modelado de los objetos reales. Hay colisiones eliminadas para
-  facilitar la jugabilidad, como las del ring o las de algunas lámparas
-- La mesa/barra del bar tiene la altura ajustada para adaptarse a la altura
-  real de los jugadores de VRChat
+- All light sources were placed manually, and the lighting is entirely baked (
+  except for the pole dance bar).
+- Video player.
+- Functional pole dance bar.
+- Markers to draw in 3D.
+- Interactive bar cups, glasses, and chairs.
+- Globally deactivatable bar.
+- Locally activatable bar mirror.
+- Activation/deactivation of the bar's exterior and interior:
+    - When the player is in the city, the bar's interior is completely
+      deactivated (is not renderer).
+    - When the player enters the bar, the city is deactivated, and the interior
+      is activated.
+- The players' spawn is inside a moving Crimson Guard transport.
+- 3D neon bar sign based on the original sprite.
+- Suspended dust particles in well-lit areas.
+- The Precursor temple and the city castle were repositioned to be visible from
+  outside the bar, even though they are not there in the game.
+- The city has multiple levels of detail, maintaining the original model's
+  resolution in the playable area while lowering resolution for everything else.
+- Water simulating the city's reflection. The city is duplicated below with
+  lower detail, and since the water is semi-transparent, it appears as a
+  reflection. Techniques like Reflection Probes or Screen Space Reflections did
+  not work well.
+- Optimized collisions using a lower complexity version of objects. Some
+  collisions were removed to improve gameplay, such as the ring's and some
+  lamps.
+- The bar height was adjusted to match the real height of VRChat
+  players.
 
-# Pasos
+# Steps
 
-Este no es un manual completo, si no es un resumen de todos los pasos que he
-realizado enfocándome en los pasos menos documentados en internet y que más
-me costaron en el momento de hacerlo.
+This is not a complete manual but rather a summary of all the steps I took,
+focusing on the less documented and more challenging parts I encountered.
 
-## Extraer modelos y texturas con OpenGoal
+## Extracting Models and Textures with OpenGoal
 
-- Descargar [OpenGoal Launcher](https://opengoal.dev/): OpenGoal es un proyecto
-  que consigue convertir varios juegos de Jak nativos de la Play Station 2 en
-  juegos nativos de PC. OpenGoal descompila el código y extrae todos los assets
-  del DVD original de Jak 2 y después lo vuelve a compilar para x86-64 (PC),
-  permitiendo jugarlo de forma nativa. Nosotros vamos a extraer los assets en el
-  paso intermedio: después de descompilar el juego original y antes de
-  recompilarlo para PC
+- Download [OpenGoal Launcher](https://opengoal.dev/): OpenGoal is a project
+  that converts several Jak games from PlayStation 2 into native PC games.
+  OpenGoal decompiles the code and extracts all assets from the original Jak 2
+  DVD before recompiling it for x86-64 (PC), allowing native play. We will
+  extract the assets in the intermediate step: after decompiling the original
+  game and before recompiling it for PC.
 
 ```mermaid
 flowchart LR
@@ -81,116 +88,108 @@ flowchart LR
     Levels["Models (glb_out)"] --> copyThese([Copy these .glb files])
 ```
 
-- Vamos a seguir los pasos que nos describe
-  la [guía de OpenGoal](https://opengoal.dev/docs/usage/installation/) para
-  jugar a Jak 2 en nuestro PC. OpenGoal solo ofrece las herramientas para
-  convertir el juego de PlayStation 2, pero no el juego en si mismo, por lo
-  que necesitaréis el juego original o un archivo ISO.
-- OpenGoal no necesita exportar los niveles (mapas) del juego para generar el
-  ejecutable final, y nosotros sí necesitamos esos archivos. Por ello, vamos a
-  cambiar unos ajustes internos y vamos a volver a iniciar el proceso completo
-  de descompilación-compilación.
-    - En la ruta donde instalaste el juego, busca en la siguiente ruta:
-      `Jak2\active\jak2\data\decompiler\config\jak2` y edita el fichero
-      `jak2_config.jsonc`
-    - Busca la variable `"rip_levels"` y ponla a `true`
-    - Ahora volvemos a compilar el juego con OpenGoal: Avanzado -> Descompilar
-    - En la ruta `Jak2\active\jak2\data\glb_out` aparecerán todos los modelos
-      del juego en formato `.glb`.
+- Follow the steps in
+  the [OpenGoal guide](https://opengoal.dev/docs/usage/installation/) to play
+  Jak 2 on PC. OpenGoal only provides tools to convert the PlayStation 2
+  game to PC, not the game itself, so you will need the original game or an
+  ISO file.
+- OpenGoal does not need to export game levels (maps) to generate the final
+  executable, but we need those files. We will modify internal settings and
+  restart the full decompilation-compilation process.
+    - Find the installed game's path and locate:
+      `Jak2\active\jak2\data\decompiler\config\jak2`.
+    - Edit the `jak2_config.jsonc` file.
+    - Locate the variable "rip_levels" and set it to `true`.
+    - Recompile the game with OpenGoal: Advanced -> Decompile.
+    - In the path `Jak2\active\jak2\data\glb_out`, all game models will appear
+      in `.glb` format.
 
-## Preparado de los modelos con Blender
+## Preparing the Models with Blender
 
-Uso Blender para preparar los modelos para Unity. En los archivos `.glb` vienen
-todos los modelos texturizados de todo el juego, agrupados por temática. Al ser
-archivos extraidos y preparados para ser usados por el motor gráfico de Jak 2,
-hay ciertas cosas que hay que arreglar.
+Blender is used to prepare the models for Unity. The `.glb` files contain all
+the game's textured models grouped thematically. Since they are extracted files
+optimized for Jak 2's graphics engine, some adjustments are needed.
 
-- Importar en blender el modelo en formato `.glb`
-- Centrar los objetos importados usando la tecla `.` y escalarlos a un tamaño
-  adecuado
-- Ahora vamos a editar los shaders por defecto para que no haya problemas en
-  Unity:
-    - Hay que ir material por material editando los grafos de los shaders a mano
-      en el `Shader Editor` (Shift + F3) quitando unos nodos intermedios que le
-      ponen efectos no deseados:
+- Import the `.glb` model into Blender.
+- Center and scale the objects appropriately.
+- Modify default shaders to avoid issues in Unity:
+    - Manually edit shader graphs in the `Shader Editor` (Shift + F3) to remove
+      intermediate nodes that add unwanted effects.
       ![shaders-jak.gif](images/shaders-jak.gif)
-    - En la parte de Materiales del modelo, hacer scroll hacia abajo buscando
-      una caja desplegada llamada Settings y cambiar el `Blend Mode` de
-      `Alpha Blend` a `Opaque`. Aunque para este caso, conseguí crear un script
-      para iterar todos los materiales y editarlos de una sola vez. Para ello
-      hay que abrir el layout Scripting y ejecutar el siguiente código en
-      python:
+    - Change one by one the `Blend Mode` from `Alpha Blend` to `Opaque` in the
+      Materials settings. You can do this programmatically with the
+      following Python script in Blender (opening Scripting layout):
 
 ```python
 import bpy
 
-# Recorre todos los materiales en el proyecto
+# Iterate through all materials in the project
 for material in bpy.data.materials:
     try:
         material.blend_method = "OPAQUE"
     except Exception as e:
-        print(f"Error al procesar el material {material.name}")
+        print(f"Error processing material {material.name}")
 ```
 
-- Lo siguiente es arreglar hacia que dirección miran las caras de los
-  polígonos (las normales), ya que por defecto vienen en alternancia, y nosotros
-  queremos que todas las caras miren hacia afuera, dado que las caras que no
-  miran a la cámara no se renderizan. Algunos atajos útiles para esto son:
-    - Shift+G: Selección por tipo
-    - L: Selección de todas las caras contiguas
-    - Alt+N: Menú para recalcular normales manual o automáticamente
+- The next step is to fix the direction in which the polygon faces (normals) are
+  oriented since, by default, they alternate (outward, inward, outward,
+  inward...). We want all faces to face outward because faces that do not
+  face the camera are not rendered. Some useful shortcuts for this are:
+
+    - Shift+G: Select by type
+    - L: Select all contiguous faces
+    - Alt+N: Menu to manually or automatically recalculate normals
       ![jak-normals.gif](images/jak-normals.gif)
 
-- Finalmente, vamos a exportar los modelos con sus texturas en formato `.
-fbx`. Este paso es delicado y hay veces que puede no funcionar correctamente
-  a la primera.
-    - Asegúrate de tener el proyecto de blender guardado ya en un fichero
-    - Debemos exportar las texturas fuera de nuestro archivo de blender. Para
-      ello vamos a File -> External data -> Unpack resources. Ahora, al lado
-      de nuestro fichero de blender habrá aparecido una carpeta llamada
-      `textures`.
-    - Debemos ir a File -> Export -> FBX y marcar las siguientes
-      opciones a la derecha de la ventana emergente:
+- Finally, we are going to export the models with their textures in `.fbx`
+  format. This step is delicate, and sometimes it may not work correctly on the
+  first try.
+    - Make sure you have the Blender project already saved as a file.
+    - We need to export the textures outside our Blender file. To do this, go
+      to File -> External Data -> Unpack Resources. Now, next to our Blender
+      file, a folder named `textures` will appear.
+    - Go to File -> Export -> FBX and enable the following options on the
+      right side of the popup window:
         - Path Mode: Copy
-        - Marcar Embed textures (a la derecha del desplegable de Path Mode)
-        - Marcar Selected Objects
+        - Enable Embed Textures (to the right of the Path Mode dropdown)
+        - Enable Selected Objects
 
           <img src="images/export-fbx.png" width="200"/>
 
-## Creando el escenario para VRChat
+## Creating the Environment for VRChat
 
-Aquí viene la parte creativa, y no voy a centrarme mucho aquí, pero voy a
-dar algunos tips en las partes del desarrollo donde me quedé más atascado.
+This is the creative part, and I won’t focus too much on it, but I will give
+some tips on the development steps where I got stuck the most.
 
-- Primero, has de instalar VRChat Creator Companion. Este launcher a su vez
-  instalará Unity, con el que crearemos nuestros mundos
-- Una vez creado un mundo vacio de VRChat, vamos a importar los modelos
-  `.fbx` que exportamos previamente en Blender.
-- Pegamos el `.fbx` en los assets de nuestro proyecto de Unity
-- Al seleccionarlo, se abrirá el inspector. Ahora vamos a personalizar distintos
-  valores. Empezamos con el tab `Model`
+- First, you need to install `VRChat Creator Companion`. This launcher will
+  also install `Unity`, which we will use to create our worlds.
+- Once a blank VRChat world is created, we will import the `.fbx` models that we
+  previously exported from `Blender`.
+- Paste the `.fbx` file into the `Assets` folder of your Unity project.
+- When selecting it, the inspector will open. Now we will customize
+  different settings, starting with the `Model` tab.
 
   <img src="images/import-fbx-settings.png" width="300"/>
 
-    - Para que la iluminación se aplique correctamente al hacer `bake`,
-      nuestros modelos necesitan `Lightmap UVs`, por lo que vamos a marcarlo.
-    - Podemos modificar el `Hard Angle` para ajustar la suavidad o diferencia
-      de iluminación entre varias caras.
-    - Debemos ajustar el parámetro `Min Lightmap Resolution`: ponerlo bajo
-      para los elementos que estarán lejos del jugador y alto para los
-      cercanos, ya que más resolución significará que la iluminación será más
-      realista (entre otros ajustes).
-    - Aplicamos cambios
-    - Podemos ajustar la resolución de todos los `Lightmap UVs` activando el
-      siguiente modo de visualización:
+    - For lighting to be applied correctly when performing a `bake`, our models
+      need `Lightmap UVs`, so we will enable this option.
+    - We can modify the `Hard Angle` to adjust the smoothness or difference in
+      lighting between the faces.
+    - The `Min Lightmap Resolution` parameter should be adjusted—set it low
+      for objects far from the player and high for closer ones, as higher
+      resolution will make the lighting more realistic (among other effects).
+    - Apply the changes.
+    - We can adjust the resolution of all `Lightmap UVs` by enabling the
+      following visualization mode:
 
       ![uv-overlap.png](images/uv-overlap.png)
-- Ahora vamos con el tab `Materials`
-    - Extraemos las texturas y los materiales
-- A partir de aquí ya es ir montando el escenario usando todos los modelos y
-  texturas, agregando iluminación, assets y lógica de programación con `Udon`
+- Now, let's move on to the `Materials` tab.
+    - Extract the textures and materials.
+- From here, it's just a matter of assembling the environment using all the
+  models and textures, adding lighting, assets, and programming logic with
+  `Udon`
 
-# Imágenes Blender
+# Blender Images
 
 ![images/blender/img.png](images/blender/img.png)
 
@@ -200,7 +199,7 @@ dar algunos tips en las partes del desarrollo donde me quedé más atascado.
 
 ![images/blender/img_3.png](images/blender/img_3.png)
 
-# Imágenes Unity
+# Unity Images
 
 ![images/unity/img.png](images/unity/img.png)
 
